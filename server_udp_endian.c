@@ -38,7 +38,6 @@ int main(int argc, char *argv[]) {
    fromlen = sizeof(struct sockaddr_in);
 
    //Pede um numero inteiro e uma frase ao utilizador
-
    printf("Enter a message: ");
    bzero(frase,256);
    fgets(frase,255,stdin);
@@ -48,13 +47,6 @@ int main(int argc, char *argv[]) {
 
    //forever cicle for clients
    while (1) {
-       //write(1,"Message received from user: ",29);
-       //write(1,frase, strlen(frase));
-       //printf("Number received from user: %d\n", n_util);
-
-       //write(1, "Number received from user: ", 28);
-       //write(1, n_util, sizeof(n_util));
-
        //receives datagrama that identifies client
        n = recvfrom(sock,buf,1024,0,(struct sockaddr *)&from,&fromlen);
        if (n < 0) error("Error in recvfrom");

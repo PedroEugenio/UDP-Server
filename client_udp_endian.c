@@ -25,9 +25,7 @@ int main(int argc, char *argv[])
    hp = gethostbyname(argv[1]);
    if (hp==0) error("Unknown host");
 
-   bcopy((char *)hp->h_addr,
-        (char *)&server.sin_addr,
-         hp->h_length);
+   bcopy((char *)hp->h_addr, (char *)&server.sin_addr, hp->h_length);
    server.sin_port = htons(atoi(argv[2]));
    length=sizeof(struct sockaddr_in);
 
@@ -44,16 +42,13 @@ int main(int argc, char *argv[])
    bzero(buffer,256);
    n = recvfrom(sock,buffer,256,0,&from, &length);
    if (n < 0) error("Error in recvfrom (text)");
-   //write(1,"Got an ack: ",12);
    printf("\nText received from server: %s\n", buffer);
-   //write(1,buffer,n);
 
    n = recvfrom(sock,&n_util,sizeof(n_util),0,&from, &length);
    if (n < 0) error("Error in recvfrom (text)");
-   //write(1,"Got an ack: ",12);
-   //n_util=ntohl(n_util);
+   n_util=ntohl(n_util);
    printf("\nNumber received from server: %d\n", n_util);
-   //write(1,buffer,n);
+
 }
 //---------------------------------------------------------
 // trata mensagens de erro
