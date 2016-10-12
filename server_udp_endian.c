@@ -1,8 +1,3 @@
-/* Creates a datagram server (uses UDP).  
-   The port number is passed as an argument.  
-   This server runs forever */
-// changed by Paulo Coimbra, 08.10.27, 2014-10-25
-//---------------------------------------------------------
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -38,12 +33,12 @@ int main(int argc, char *argv[]) {
    server.sin_family=AF_INET;
    server.sin_addr.s_addr=INADDR_ANY;
    server.sin_port=htons(atoi(argv[1]));
-   if (bind(sock,(struct sockaddr *)&server,length)<0) 
+   if (bind(sock,(struct sockaddr *)&server,length)<0)
        error("Error in binding");
    fromlen = sizeof(struct sockaddr_in);
 
    //Pede um numero inteiro e uma frase ao utilizador
-   
+
    printf("Enter a message: ");
    bzero(frase,256);
    fgets(frase,255,stdin);
@@ -56,10 +51,10 @@ int main(int argc, char *argv[]) {
        //write(1,"Message received from user: ",29);
        //write(1,frase, strlen(frase));
        //printf("Number received from user: %d\n", n_util);
-       
+
        //write(1, "Number received from user: ", 28);
        //write(1, n_util, sizeof(n_util));
-       
+
        //receives datagrama that identifies client
        n = recvfrom(sock,buf,1024,0,(struct sockaddr *)&from,&fromlen);
        if (n < 0) error("Error in recvfrom");
@@ -71,10 +66,8 @@ int main(int argc, char *argv[]) {
        if (n  < 0) error("Error in sendto");
 
        n = sendto(sock, &n_util, sizeof(n_util), 0, (struct sockaddr *)&from, fromlen);
-       if (n  < 0) error("Error in sendto");   
+       if (n  < 0) error("Error in sendto");
    }//while
  }
 //---------------------------------------------------------
 //---------------------------------------------------------
-
-

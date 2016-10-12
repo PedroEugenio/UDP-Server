@@ -1,6 +1,3 @@
-/* UDP client in the internet domain */
-// changed by Paulo Coimbra, 2008.10.30, 2014-10-25
-//---------------------------------------------------------
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -16,7 +13,7 @@ int main(int argc, char *argv[])
    struct sockaddr_in server, from;
    struct hostent *hp;
    char buffer[256];
-   
+
    if (argc != 3) { printf("Usage: server_udp port\n");
                     exit(1);
    }
@@ -28,7 +25,7 @@ int main(int argc, char *argv[])
    hp = gethostbyname(argv[1]);
    if (hp==0) error("Unknown host");
 
-   bcopy((char *)hp->h_addr, 
+   bcopy((char *)hp->h_addr,
         (char *)&server.sin_addr,
          hp->h_length);
    server.sin_port = htons(atoi(argv[2]));
